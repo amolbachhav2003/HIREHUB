@@ -2,11 +2,11 @@ import express from 'express'
 import cors from 'cors'
 import path, { dirname } from 'path'
 
-import { serve } from 'inngest/express'
-
 import { ENV } from './lib/env.js'
 import { connectDB } from './lib/db.js'
 
+import { serve } from 'inngest/express'
+import { inngest, functions } from './lib/inngest.js'
 
 
 const app = express()

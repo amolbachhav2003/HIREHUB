@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import path, { dirname } from 'path'
+import { clerkMiddleware } from '@clerk/express'
 
 import { ENV } from './lib/env.js'
 import { connectDB } from './lib/db.js'
@@ -17,7 +18,7 @@ const __dirname = path.resolve()
 app.use(express.json())
 app.use(cors({origin:ENV.CLIENT_URL,credentials:true}))
 app.use('/api/inngest', serve({client: inngest, functions}))
-
+app.use(clerkMiddleware()) // this adds auth fields to request object: req.auth()
 
 app.get('/health', (req, res) => {
     res.status(200).json({ message: 'success from backend' })
